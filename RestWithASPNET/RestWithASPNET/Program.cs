@@ -1,44 +1,69 @@
+using EvolveDb;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using RestWithASPNET.Repository;
+using Serilog;
+using RestWithASPNETErudio.Business;
+using RestWithASPNETErudio.Business.Implementations;
+using RestWithASPNET.Repository.Generic;
+using RestWithASPNETErudio.Model.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configuração do logger Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
+// Configuração do serviço do Entity Framework Core
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
+builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
+builder.Services.AddControllers();
+builder.Services.AddApiVersioning();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware de migração de banco de dados para ambiente de desenvolvimento
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    MigrateDatabase(builder.Configuration.GetConnectionString("DefaultConnection"));
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+// Método para realizar migração de banco de dados com Evolve
+void MigrateDatabase(string connection)
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    try
+    {
+        var sqlConnection = new SqlConnection(connection);
+     var evolve = new Evolve(sqlConnection, Log.Information)
+        {
+            Locations = new List<string> { "db/migrations", "db/dataset" },
+            IsEraseDisabled = true,
+        };
+        evolve.Migrate();
+    }
+    catch (Exception ex)
+    {
+        Log.Error("Database migration failed", ex);
+        throw;
+    }
 }

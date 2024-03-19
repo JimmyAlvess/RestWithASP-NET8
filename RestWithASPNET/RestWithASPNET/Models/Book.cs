@@ -1,0 +1,22 @@
+﻿using RestWithASPNET.Models.Base;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata.Ecma335;
+
+namespace RestWithASPNET.Models
+{
+    [Table("Books")]
+    public class Book : BaseEntity
+    {
+        [Column("title")]
+        public string? Title { get; set; }
+
+        [Column("author")]
+        public string Author { get; set; }
+
+        [Column("price")]
+        public decimal Price { get; set; }
+
+        [Column("launch_date")]
+        public DateTime launch_date { get; set; }
+    }
+}
