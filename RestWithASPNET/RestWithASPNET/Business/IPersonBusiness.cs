@@ -1,14 +1,14 @@
 ﻿
-using RestWithASPNETErudio.Model;
+using RestWithASPNET.Data.VO;
 
 namespace RestWithASPNETErudio.Business
 {
     public interface IPersonBusiness
     {
-        Person Create(Person person);
-        Person FindByID(int id);
-        List<Person> FindAll();
-        Person Update(Person person);
+        PersonVO Create(PersonVO person);
+        PersonVO FindByID(int id);
+        List<PersonVO> FindAll();
+        PersonVO Update(PersonVO person);
         void Delete(int id);
     }
 }

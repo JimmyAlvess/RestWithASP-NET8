@@ -2,6 +2,7 @@
 using RestWithASPNETErudio.Model;
 using RestWithASPNETErudio.Business;
 using Microsoft.AspNetCore.Mvc;
+using RestWithASPNET.Data.VO;
 
 namespace RestWithASPNETErudio.Controllers
 {
@@ -29,20 +30,20 @@ namespace RestWithASPNETErudio.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var person = _personBusiness.FindByID(id);
-            if (person == null) return NotFound();
-            return Ok(person);
+            var PersonVO = _personBusiness.FindByID(id);
+            if (PersonVO == null) return NotFound();
+            return Ok(PersonVO);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Create(person));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Update(person));
