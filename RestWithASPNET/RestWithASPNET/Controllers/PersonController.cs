@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
-using RestWithASPNETErudio.Model;
 using RestWithASPNETErudio.Business;
 using Microsoft.AspNetCore.Mvc;
-using RestWithASPNET.Data.VO;
+using RestWithASPNET.Hypermedia.Filters;
+using RestWithASPNETErudio.Data.VO;
 
 namespace RestWithASPNETErudio.Controllers
 {
@@ -23,11 +23,13 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
         }
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Get(int id)
         {
             var PersonVO = _personBusiness.FindByID(id);
@@ -36,6 +38,7 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
@@ -43,6 +46,7 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();

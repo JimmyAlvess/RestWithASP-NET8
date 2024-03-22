@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Scaffolding;
-using RestWithASPNET.Data.Converter.Contract;
-using RestWithASPNET.Data.VO;
+﻿using RestWithASPNET.Data.Converter.Contract;
+using RestWithASPNETErudio.Data.VO;
 using RestWithASPNETErudio.Model;
 
 namespace RestWithASPNET.Data.Converter.Implementations

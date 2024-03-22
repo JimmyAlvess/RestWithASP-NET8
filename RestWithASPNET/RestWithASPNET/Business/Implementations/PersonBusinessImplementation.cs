@@ -1,6 +1,6 @@
 ﻿using RestWithASPNET.Data.Converter.Implementations;
-using RestWithASPNET.Data.VO;
 using RestWithASPNET.Repository;
+using RestWithASPNETErudio.Data.VO;
 using RestWithASPNETErudio.Model;
 
 namespace RestWithASPNETErudio.Business.Implementations

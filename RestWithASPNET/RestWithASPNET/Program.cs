@@ -7,8 +7,9 @@ using RestWithASPNETErudio.Business;
 using RestWithASPNETErudio.Business.Implementations;
 using RestWithASPNET.Repository.Generic;
 using RestWithASPNETErudio.Model.Context;
-using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using RestWithASPNETErudio.Hypermedia.Enricher;
+using RestWithASPNET.Hypermedia.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,11 +36,17 @@ builder.Services.AddControllersWithViews(options =>
     options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
     options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
 })
-.AddXmlSerializerFormatters(); 
+.AddXmlSerializerFormatters();
 
+var filterOptions = new HyperMidiaFilterOptions();
+filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
 
+builder.Services.AddSingleton(filterOptions);
 
+//Version API
 builder.Services.AddApiVersioning();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -56,8 +63,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
+app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
 app.Run();
 
