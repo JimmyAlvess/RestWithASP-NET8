@@ -7,6 +7,8 @@ using RestWithASPNETErudio.Business;
 using RestWithASPNETErudio.Business.Implementations;
 using RestWithASPNET.Repository.Generic;
 using RestWithASPNETErudio.Model.Context;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,18 @@ builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.RespectBrowserAcceptHeader = true;
+
+    options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
+    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+})
+.AddXmlSerializerFormatters(); 
+
+
+
 builder.Services.AddApiVersioning();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,7 +53,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
