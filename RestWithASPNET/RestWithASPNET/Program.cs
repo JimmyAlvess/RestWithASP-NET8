@@ -10,8 +10,13 @@ using RestWithASPNETErudio.Model.Context;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using RestWithASPNETErudio.Hypermedia.Enricher;
 using RestWithASPNET.Hypermedia.Filters;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Rewrite;
 
 var builder = WebApplication.CreateBuilder(args);
+var appName = "REST API's RESTfull from to Azure with ASP .NET Core 8 and Docker";
+var appVersion = "v1";
+var appDescription = "REST API RESTful developed from 0 to Azure with ASP.NET Core 8 and Docker";
 
 // Configuração do logger Serilog
 Log.Logger = new LoggerConfiguration()
@@ -26,7 +31,7 @@ builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 
 builder.Services.AddControllersWithViews(options =>
@@ -48,6 +53,23 @@ builder.Services.AddSingleton(filterOptions);
 builder.Services.AddApiVersioning();
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c => 
+{
+    c.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Title = appName,
+            Version = appVersion,
+            Description = appDescription,
+            Contact = new OpenApiContact
+            {
+                Name = "Matheus Alves",
+                Url = new Uri("https://github.com/JimmyAlvess")
+            }
+        }); ; 
+});
+
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -58,9 +80,18 @@ if (app.Environment.IsDevelopment())
     MigrateDatabase(builder.Configuration.GetConnectionString("DefaultConnection"));
 }
 
-app.UseSwagger();
-app.UseSwaggerUI();
 app.UseHttpsRedirection();
+
+app.UseSwagger();
+
+app.UseSwaggerUI(c => {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json",
+        $"{appName} - {appVersion}");
+});
+
+var options = new RewriteOptions();
+options.AddRedirect("^$", "swagger");
+app.UseRewriter(options);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

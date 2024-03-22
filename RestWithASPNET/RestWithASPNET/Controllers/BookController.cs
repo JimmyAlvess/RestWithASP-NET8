@@ -3,6 +3,7 @@ using Asp.Versioning;
 using RestWithASPNETErudio.Business;
 using RestWithASPNET.Data.VO;
 using RestWithASPNET.Hypermedia.Filters;
+using RestWithASPNETErudio.Data.VO;
 
 namespace RestWithASPNETErudio.Controllers
 {
@@ -21,6 +22,10 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Get()
         {
@@ -28,6 +33,10 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Get(int id)
         {
             var BookVO = _bookBusiness.FindByID(id);
@@ -37,6 +46,9 @@ namespace RestWithASPNETErudio.Controllers
 
         [HttpPost]
         [TypeFilter(typeof(HyperMidaFilter))]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Post([FromBody] BookVO BookVO)
         {
             if (BookVO == null) return BadRequest();
@@ -44,6 +56,9 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Put([FromBody] BookVO BookVO)
         {

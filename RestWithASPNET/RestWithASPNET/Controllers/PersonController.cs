@@ -23,12 +23,21 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType((200), Type= typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
         }
+
         [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Get(int id)
         {
@@ -38,6 +47,9 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
@@ -46,12 +58,16 @@ namespace RestWithASPNETErudio.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMidaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Update(person));
         }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
