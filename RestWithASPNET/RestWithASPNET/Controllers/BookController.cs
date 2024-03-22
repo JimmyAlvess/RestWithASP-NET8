@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestWithASPNETErudio.Model;
-using RestWithASPNETErudio.Business;
 using Asp.Versioning;
-using RestWithASPNET.Models;
+using RestWithASPNETErudio.Business;
+using RestWithASPNET.Data.VO;
 
 namespace RestWithASPNETErudio.Controllers
 {
@@ -13,9 +12,7 @@ namespace RestWithASPNETErudio.Controllers
     public class BookController : ControllerBase
     {
         private readonly ILogger<BookController> _logger;
-
-        private IBookBusiness _bookBusiness;
-
+        private readonly IBookBusiness _bookBusiness;
         public BookController(ILogger<BookController> logger, IBookBusiness bookBusiness)
         {
             _logger = logger;
@@ -31,23 +28,23 @@ namespace RestWithASPNETErudio.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var book = _bookBusiness.FindByID(id);
-            if (book == null) return NotFound();
-            return Ok(book);
+            var BookVO = _bookBusiness.FindByID(id);
+            if (BookVO == null) return NotFound();
+            return Ok(BookVO);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] BookVO BookVO)
         {
-            if (book == null) return BadRequest();
-            return Ok(_bookBusiness.Create(book));
+            if (BookVO == null) return BadRequest();
+            return Ok(_bookBusiness.Create(BookVO));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book book)
+        public IActionResult Put([FromBody] BookVO BookVO)
         {
-            if (book == null) return BadRequest();
-            return Ok(_bookBusiness.Update(book));
+            if (BookVO == null) return BadRequest();
+            return Ok(_bookBusiness.Update(BookVO));
         }
 
         [HttpDelete("{id}")]
