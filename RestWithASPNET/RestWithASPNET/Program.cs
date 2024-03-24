@@ -23,6 +23,14 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
 
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
+{
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+}));
+
 // Configuração do serviço do Entity Framework Core
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -31,7 +39,7 @@ builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 builder.Services.AddControllers();
 
 builder.Services.AddControllersWithViews(options =>
@@ -82,6 +90,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors();
+
 app.UseSwagger();
 
 app.UseSwaggerUI(c => {
@@ -93,7 +103,9 @@ var options = new RewriteOptions();
 options.AddRedirect("^$", "swagger");
 app.UseRewriter(options);
 app.UseAuthentication();
+
 app.UseAuthorization();
+
 app.MapControllers();
 app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
