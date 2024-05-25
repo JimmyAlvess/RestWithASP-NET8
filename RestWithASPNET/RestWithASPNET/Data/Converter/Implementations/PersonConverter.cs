@@ -1,6 +1,6 @@
 ﻿using RestWithASPNET.Data.Converter.Contract;
-using RestWithASPNETErudio.Data.VO;
-using RestWithASPNETErudio.Model;
+using RestWithASPNET.Data.VO;
+using RestWithASPNET.Model;
 
 namespace RestWithASPNET.Data.Converter.Implementations
 {

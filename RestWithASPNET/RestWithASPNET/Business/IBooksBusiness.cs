@@ -1,7 +1,7 @@
 ﻿using RestWithASPNET.Data.VO;
 using RestWithASPNET.Models;
 
-namespace RestWithASPNETErudio.Business
+namespace RestWithASPNET.Business
 {
     public interface IBookBusiness
     {

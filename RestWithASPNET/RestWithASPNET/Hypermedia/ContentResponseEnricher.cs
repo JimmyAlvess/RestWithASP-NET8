@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Routing;
 using RestWithASPNET.Hypermedia.Abstract;
-using RestWithASPNETErudio.Hypermedia.Abstract;
 using System.Collections.Concurrent;
 
-namespace RestWithASPNETErudio.Hypermedia
+namespace RestWithASPNET.Hypermedia
 {
     public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportsHyperMedia
     {

@@ -1,4 +1,4 @@
-﻿namespace RestWithASPNETErudio.Hypermedia.Constants
+﻿namespace RestWithASPNET.Hypermedia.Constants
 {
     public sealed class ResponseTypeFormat
     {

@@ -1,7 +1,7 @@
 ﻿using RestWithASPNET.Models.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RestWithASPNETErudio.Model
+namespace RestWithASPNET.Model
 {
     [Table("person")]
     public class Person : BaseEntity

@@ -3,7 +3,7 @@ using RestWithASPNET.Data.VO;
 using RestWithASPNET.Models;
 using RestWithASPNET.Repository;
 
-namespace RestWithASPNETErudio.Business.Implementations
+namespace RestWithASPNET.Business.Implementations
 {
     public class BookBusinessImplementation : IBookBusiness
     {

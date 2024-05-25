@@ -1,5 +1,4 @@
-﻿using RestWithASPNET.Models;
-using RestWithASPNET.Models.Base;
+﻿using RestWithASPNET.Models.Base;
 
 namespace RestWithASPNET.Repository
 {

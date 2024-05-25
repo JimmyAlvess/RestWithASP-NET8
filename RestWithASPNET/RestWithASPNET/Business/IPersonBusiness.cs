@@ -1,6 +1,6 @@
-﻿using RestWithASPNETErudio.Data.VO;
+﻿using RestWithASPNET.Data.VO;
 
-namespace RestWithASPNETErudio.Business
+namespace RestWithASPNET.Business
 {
     public interface IPersonBusiness
     {

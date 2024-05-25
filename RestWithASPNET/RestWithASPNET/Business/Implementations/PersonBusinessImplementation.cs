@@ -1,9 +1,9 @@
 ﻿using RestWithASPNET.Data.Converter.Implementations;
+using RestWithASPNET.Data.VO;
+using RestWithASPNET.Model;
 using RestWithASPNET.Repository;
-using RestWithASPNETErudio.Data.VO;
-using RestWithASPNETErudio.Model;
 
-namespace RestWithASPNETErudio.Business.Implementations
+namespace RestWithASPNET.Business.Implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {

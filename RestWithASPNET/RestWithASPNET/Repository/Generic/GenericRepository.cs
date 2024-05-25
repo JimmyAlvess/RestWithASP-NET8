@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestWithASPNET.Models;
+using RestWithASPNET.Model.Context;
 using RestWithASPNET.Models.Base;
-using RestWithASPNETErudio.Model.Context;
 
 namespace RestWithASPNET.Repository.Generic
 {

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace RestWithASPNETErudio.Hypermedia
+namespace RestWithASPNET.Hypermedia
 {
     public class HyperMediaLink
     {

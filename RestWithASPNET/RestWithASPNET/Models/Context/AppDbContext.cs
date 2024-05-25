@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestWithASPNET.Models;
 
-namespace RestWithASPNETErudio.Model.Context
+namespace RestWithASPNET.Model.Context
 {
     public class AppDbContext : DbContext
     {
@@ -14,5 +14,6 @@ namespace RestWithASPNETErudio.Model.Context
         }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RestWithASPNETErudio.Hypermedia.Abstract
+namespace RestWithASPNET.Hypermedia.Abstract
 {
     public interface ISupportsHyperMedia
     {

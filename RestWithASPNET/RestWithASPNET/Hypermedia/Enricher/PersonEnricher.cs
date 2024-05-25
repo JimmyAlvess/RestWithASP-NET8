@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RestWithASPNET.Data.VO;
 using RestWithASPNET.Hypermedia.Constants;
-using RestWithASPNETErudio.Data.VO;
-using RestWithASPNETErudio.Hypermedia.Constants;
 using System.Text;
 
-namespace RestWithASPNETErudio.Hypermedia.Enricher
+namespace RestWithASPNET.Hypermedia.Enricher
 {
     public class PersonEnricher : ContentResponseEnricher<PersonVO>
     {

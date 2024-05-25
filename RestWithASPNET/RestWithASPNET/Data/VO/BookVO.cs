@@ -1,5 +1,5 @@
-﻿using RestWithASPNETErudio.Hypermedia;
-using RestWithASPNETErudio.Hypermedia.Abstract;
+﻿using RestWithASPNET.Hypermedia;
+using RestWithASPNET.Hypermedia.Abstract;
 
 namespace RestWithASPNET.Data.VO
 {

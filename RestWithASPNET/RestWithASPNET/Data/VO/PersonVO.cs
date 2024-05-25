@@ -1,8 +1,7 @@
-﻿using RestWithASPNETErudio.Hypermedia;
-using RestWithASPNETErudio.Hypermedia.Abstract;
+﻿using RestWithASPNET.Hypermedia;
+using RestWithASPNET.Hypermedia.Abstract;
 
-namespace RestWithASPNETErudio.Data.VO
-
+namespace RestWithASPNET.Data.VO
 {
     public class PersonVO : ISupportsHyperMedia
     {

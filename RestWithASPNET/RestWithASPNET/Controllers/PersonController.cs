@@ -1,14 +1,16 @@
 ﻿using Asp.Versioning;
-using RestWithASPNETErudio.Business;
 using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Hypermedia.Filters;
-using RestWithASPNETErudio.Data.VO;
+using Microsoft.AspNetCore.Authorization;
+using RestWithASPNET.Business;
+using RestWithASPNET.Data.VO;
 
-namespace RestWithASPNETErudio.Controllers
+namespace RestWithASPNET.Controllers
 {
 
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {

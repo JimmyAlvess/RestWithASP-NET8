@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Data.VO;
 using RestWithASPNET.Hypermedia.Constants;
-using RestWithASPNET.Hypermedia;
-using RestWithASPNETErudio.Hypermedia.Constants;
 using System.Text;
 
-namespace RestWithASPNETErudio.Hypermedia.Enricher
+namespace RestWithASPNET.Hypermedia.Enricher
 {
     public class BookEnricher : ContentResponseEnricher<BookVO>
     {
