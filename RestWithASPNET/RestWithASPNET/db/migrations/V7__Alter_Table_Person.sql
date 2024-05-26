@@ -1,0 +1,2 @@
+ALTER TABLE Person
+ADD enabled BIT NOT NULL CONSTRAINT DF_Person_Enabled DEFAULT 1;

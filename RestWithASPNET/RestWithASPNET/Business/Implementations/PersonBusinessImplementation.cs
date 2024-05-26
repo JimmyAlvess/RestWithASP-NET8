@@ -1,4 +1,5 @@
-﻿using RestWithASPNET.Data.Converter.Implementations;
+﻿using Microsoft.AspNetCore.Components.Web;
+using RestWithASPNET.Data.Converter.Implementations;
 using RestWithASPNET.Data.VO;
 using RestWithASPNET.Model;
 using RestWithASPNET.Repository;
@@ -8,10 +9,10 @@ namespace RestWithASPNET.Business.Implementations
     public class PersonBusinessImplementation : IPersonBusiness
     {
 
-        private readonly IRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
         private readonly PersonConverter _converter;
 
-        public PersonBusinessImplementation(IRepository<Person> repository)
+        public PersonBusinessImplementation(IPersonRepository repository)
         {
             _repository = repository;
             _converter = new PersonConverter();
@@ -37,6 +38,11 @@ namespace RestWithASPNET.Business.Implementations
         {
             var personEntity = _converter.Parse(person);
             personEntity= _repository.Update(personEntity);
+            return _converter.Parse(personEntity);
+        }
+        public PersonVO Disable(int id)
+        {
+            var personEntity = _repository.Disabled(id);
             return _converter.Parse(personEntity);
         }
         public void Delete(int id)

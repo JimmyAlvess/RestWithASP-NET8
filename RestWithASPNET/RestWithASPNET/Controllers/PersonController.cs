@@ -70,6 +70,18 @@ namespace RestWithASPNET.Controllers
             return Ok(_personBusiness.Update(person));
         }
 
+        [HttpPatch("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMidaFilter))]
+        public IActionResult Patch(int id)
+        {
+            var PersonVO = _personBusiness.Disable(id);
+            return Ok(PersonVO);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
