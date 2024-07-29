@@ -10,5 +10,7 @@ namespace RestWithASPNET.Repository
         T Update(T item);
         void Delete(int id);
         bool Exists(int id);
+        List<T> FindWithPageSearch(string query);
+        int GetCount(string query);
     }
 }
