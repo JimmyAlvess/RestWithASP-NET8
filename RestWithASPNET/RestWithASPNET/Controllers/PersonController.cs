@@ -7,7 +7,6 @@ using RestWithASPNET.Data.VO;
 
 namespace RestWithASPNET.Controllers
 {
-
     [ApiVersion("1")]
     [ApiController]
     [Authorize("Bearer")]

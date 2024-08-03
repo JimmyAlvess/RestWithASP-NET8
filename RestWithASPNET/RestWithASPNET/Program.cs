@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using RestWithASPNET.Model.Context;
 using RestWithASPNET.Hypermedia.Enricher;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var appName = "REST API's RESTfull from to Azure with ASP .NET Core 8 and Docker";
@@ -117,9 +118,12 @@ builder.Services.AddSingleton(filterOptions);
 //Version API
 builder.Services.AddApiVersioning();
 
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 builder.Services.AddScoped<ILoginBusiness, LoginBusinessImplementations>();
+builder.Services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
 builder.Services.AddTransient<ITokenService, TokenService>();
 
