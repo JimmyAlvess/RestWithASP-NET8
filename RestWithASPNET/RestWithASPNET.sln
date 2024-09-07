@@ -3,20 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestWithASPNET", "RestWithASPNET\RestWithASPNET.csproj", "{093C3EBD-A878-446F-9618-2EFCB02C8F33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWithASPNET", "RestWithASPNET\RestWithASPNET.csproj", "{093C3EBD-A878-446F-9618-2EFCB02C8F33}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F173961E-0807-49D7-AC76-2DFBBF545B87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{093C3EBD-A878-446F-9618-2EFCB02C8F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{093C3EBD-A878-446F-9618-2EFCB02C8F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{093C3EBD-A878-446F-9618-2EFCB02C8F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{093C3EBD-A878-446F-9618-2EFCB02C8F33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F173961E-0807-49D7-AC76-2DFBBF545B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F173961E-0807-49D7-AC76-2DFBBF545B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F173961E-0807-49D7-AC76-2DFBBF545B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F173961E-0807-49D7-AC76-2DFBBF545B87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

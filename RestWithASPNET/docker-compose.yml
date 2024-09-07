@@ -1,0 +1,37 @@
+services:
+  db:
+    image: rest-with-asp-net-db
+    command: 'sqlserver --default-authentication-plugin=sqlserver_native-password'
+    restart: always
+    build: 
+      context: ./RestWithASPNET 
+      dockerfile: Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      SQLSERVER_ROOT_PASSWORD: docker
+      SQLSERVER_USER: matheusteste
+      SQLSERVER_PASSWORD: 12345
+      SQLSERVER_DATABASE: rest_with_asp_net
+    ports:
+      - 3308:2206
+    networks:
+      - networks
+     
+  rest-with-asp-net:
+    image: rest_with_asp_net
+    build:
+      context: .
+      dockerfile: RestWithASPNET/Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - 51118:80
+    depends_on: 
+      - db
+    networks:
+      - networks
+
+networks:
+  networks:
+    driver: bridge

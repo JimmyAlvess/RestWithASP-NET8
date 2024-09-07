@@ -139,10 +139,10 @@ var app = builder.Build();
 
 
 // Middleware de migração de banco de dados para ambiente de desenvolvimento
-if (app.Environment.IsDevelopment())
-{
-    MigrateDatabase(builder.Configuration.GetConnectionString("DefaultConnection"));
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    MigrateDatabase(builder.Configuration.GetConnectionString("DefaultConnection"));
+//}
 
 app.UseHttpsRedirection();
 
